@@ -1,3 +1,3 @@
-# BubbleSimulations
-Simulations on nano-bubbles with Lattice Density Functional Theory
+# Bubble/DropletSimulations
+Simulations on nano-bubbles/droplet with Constrained Lattice Density Functional Theory (CLDFT)
 First version
