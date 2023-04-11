@@ -1,26 +1,33 @@
-def visial_kappa(ite_num, k_mem):
+import numpy as np
+import matplotlib.pyplot as plt
 
-    import numpy as np
-    import matplotlib.pyplot as plt
+box_x, box_y, box_z, T, e_ff, ite_num = 60, 60, 60, 0.8, 1, 10000
+mu = -3.05
+NV_0 = 20000
+
+k_mem = np.load('./BubbleSimulations/output/k_NV{}_mu{}.npy'.format(NV_0, mu))
+
+rho = np.load('./BubbleSimulations/output/rho_NV{}_mu{}.npy'.format(NV_0, mu))
+
+def visial_kappa(ite_num, k_mem):
 
     fig, ax = plt.subplots()
     ax.plot(np.linspace(1, ite_num, ite_num), np.array(k_mem), linewidth=2.0)
     plt.xlabel('iteration number')
-    plt.ylabel('kappa')
+    plt.ylabel('k')
     plt.show()
 
 
-def visial_chi(box_x, box_y, box_z,chi):
+def visial_chi(box_x, box_y, box_z, rho):
 
-    import numpy as np
-    import matplotlib.pyplot as plt
+    interval = np.array([0.5])
+    chi = np.digitize(rho, interval)
 
+    bubble = np.abs(chi-1) * True
     
-
-    chi = chi * True
     fig, ax = plt.subplots(subplot_kw={"projection": "3d"})
 
-    ax.voxels(chi)
+    ax.voxels(bubble)
 
     ax.set_xbound(0, box_x)
     ax.set_ybound(0, box_y)
@@ -36,3 +43,9 @@ def visial_chi(box_x, box_y, box_z,chi):
     
     
     plt.show()
+
+
+visial_kappa(ite_num, k_mem)
+
+visial_chi(box_x, box_y, box_z, rho)
+

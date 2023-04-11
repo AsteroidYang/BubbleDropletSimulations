@@ -1,27 +1,32 @@
-"""
-fill in paramaters: box_x, box_y, box_z, T, mu, e_ff, phi, ite_num
-boundry conditions are mirror now
-"""
+import numpy as np
+import time
 
-box_x = 60
-box_y = 60
-box_z = 60
-T = 0.8               # tempreture
-mu = -2.9               # chemical potential
-e_ff = 0.99              # fluid-fluid interaction
+start = time.time()
+
 phi = 0               # external potential
-ite_num = 2000        # iteration number
-NL_0 = 10000            # constrained volume
-kappa = 0.1                 # Lanrangen paramater
 
-import initialization
-rho, chi = initialization.init(box_x, box_y, box_z)
+box_x, box_y, box_z, T, mu, e_ff, NV_0, kappa, ite_num = np.loadtxt('./BubbleSimulations/input/input.txt')
+box_x = int(box_x)
+box_y = int(box_y)
+box_z = int(box_z)
+NV_0 = int(NV_0)
+ite_num = int(ite_num)
 
+
+rho = np.load('./BubbleSimulations/input/rho_NV{}_mu{}.npy'.format(NV_0, mu))
+interval = np.array([0.5])
+chi = np.digitize(rho, interval)
 
 import iteration
-rho, kappa, k_mem, chi = iteration.iteration(ite_num, box_x, box_y, box_z, rho, T, phi, mu, kappa, e_ff, chi, NL_0)
+rho, kappa, k_mem = iteration.iteration(ite_num, box_x, box_y, box_z, rho, T, phi, mu, kappa, e_ff, chi, NV_0)
 
 
-import visialization as vs
-vs.visial_kappa(ite_num, k_mem)
-vs.visial_chi(box_x, box_y, box_z,chi)
+import grand_potential
+grand_potential.G(box_x, box_y, box_z, T, e_ff, mu, NV_0, rho)
+
+
+np.save('./BubbleSimulations/output/rho_NV{}_mu{}.npy'.format(NV_0, mu), rho)
+np.save('./BubbleSimulations/output/k_NV{}_mu{}.npy'.format(NV_0, mu), k_mem)
+
+end = time.time()
+print('\nrunning time: '+str(end-start)+'s')
