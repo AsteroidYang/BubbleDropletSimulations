@@ -1,6 +1,6 @@
 def iteration(ite_num, box_x, box_y, box_z, rho, T, phi, mu, kappa, e_ff, chi, NV_0):
 
-    import rho_iteration2
+    import rho_iteration3
     import kappa_iteration
     import numpy as np
 
@@ -9,7 +9,7 @@ def iteration(ite_num, box_x, box_y, box_z, rho, T, phi, mu, kappa, e_ff, chi, N
     interval = np.array([0.5])
     
     for n in range(ite_num):
-        rho = rho_iteration2.rho_iteration(box_x, box_y, box_z, rho, T, phi, mu, kappa, e_ff)
+        rho = rho_iteration3.rho_iteration(box_x, box_y, box_z, rho, T, phi, mu, kappa, e_ff)
         chi = np.digitize(rho, interval)
         
         k_mem.append(kappa)

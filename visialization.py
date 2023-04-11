@@ -3,7 +3,7 @@ import matplotlib.pyplot as plt
 
 box_x, box_y, box_z, T, e_ff, ite_num = 60, 60, 60, 0.8, 1, 10000
 mu = -3.05
-NV_0 = 20000
+NV_0 = 26000
 
 k_mem = np.load('./BubbleSimulations/output/k_NV{}_mu{}.npy'.format(NV_0, mu))
 
@@ -12,7 +12,7 @@ rho = np.load('./BubbleSimulations/output/rho_NV{}_mu{}.npy'.format(NV_0, mu))
 def visial_kappa(ite_num, k_mem):
 
     fig, ax = plt.subplots()
-    ax.plot(np.linspace(1, ite_num, ite_num), np.array(k_mem), linewidth=2.0)
+    ax.plot(np.linspace(1, ite_num, ite_num), np.array(k_mem))
     plt.xlabel('iteration number')
     plt.ylabel('k')
     plt.show()
