@@ -22,5 +22,5 @@ def G(box_x, box_y, box_z, T, e_ff, mu, NV_0, rho):
 
     grand_potential = T*np.sum(rho*np.log(rho) + (1-rho)*np.log(1-rho)) - np.sum(0.5*e_ff*rho*rho_sumption) - np.sum(mu*rho)
 
-    with open('./BubbleSimulations/output/G_NV{}_mu{}.txt'.format(NV_0, mu), 'w') as f:
+    with open('./output/G_NV{}_mu{}.txt'.format(NV_0, mu), 'w') as f:
         f.write(str(grand_potential))

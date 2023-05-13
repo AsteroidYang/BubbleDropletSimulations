@@ -1,14 +1,6 @@
 import numpy as np
 import matplotlib.pyplot as plt
 
-box_x, box_y, box_z, T, e_ff, ite_num = 60, 60, 60, 0.8, 1, 10000
-mu = -3.05
-NV_0 = 26000
-
-k_mem = np.load('./BubbleSimulations/output/k_NV{}_mu{}.npy'.format(NV_0, mu))
-
-rho = np.load('./BubbleSimulations/output/rho_NV{}_mu{}.npy'.format(NV_0, mu))
-
 def visial_kappa(ite_num, k_mem):
 
     fig, ax = plt.subplots()
@@ -19,7 +11,7 @@ def visial_kappa(ite_num, k_mem):
 
 
 def visial_chi(box_x, box_y, box_z, rho):
-
+    
     interval = np.array([0.5])
     chi = np.digitize(rho, interval)
 
@@ -45,7 +37,20 @@ def visial_chi(box_x, box_y, box_z, rho):
     plt.show()
 
 
-visial_kappa(ite_num, k_mem)
+def visial_rho_slice(box_x, box_y, box_z, rho_slice):
 
-visial_chi(box_x, box_y, box_z, rho)
+    
+    return None
 
+
+
+box_x, box_y, box_z, T, e_ff, ite_num = 60, 60, 60, 0.8, 1, 10000
+mu = -3.05
+NV_0 = 12000
+target_slice = 10000
+
+k_mem = np.load('./output/k_NV{}_mu{}.npy'.format(NV_0, mu))
+
+rho = np.load('./output/rho_output_NV{}_mu{}/rho_ite{}'.format(NV_0, mu, target_slice-1))
+
+rho_slice = rho[:, :, 30]
