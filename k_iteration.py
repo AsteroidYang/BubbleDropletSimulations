@@ -1,4 +1,4 @@
-def kappa_iteration(k, T, N, NV_0, chi):
+def k_iteration(k, T, N, NV_0, chi):
 
     import numpy as np
 

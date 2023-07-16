@@ -13,11 +13,9 @@ def main():
 
 
     rho = np.load('./input/rho.npy')
-    interval = np.array([0.5])
-    chi = np.digitize(rho, interval)
 
     import iteration
-    k_mem, rho = iteration.iteration(ite_num, box_x, box_y, box_z, rho, T, phi, mu, k, e_ff, chi, NV_0)
+    k_mem, rho = iteration.iteration(ite_num, box_x, box_y, box_z, rho, T, phi, mu, k, e_ff, NV_0)
 
 
     import grand_potential
@@ -29,7 +27,7 @@ def main():
     return None
 
 
-input_set = [60,    60,    60,    0.8,    -3.05,    1,      12000,      0.1,     10000]
+input_set = [60,    60,    60,    0.8,    -3.05,    1,      20000,      0.1,     10000]
     #        box_x, box_y, box_z, T,      @mu,      e_ff,   @NV_0,      kappa,   ite_num
 input_set = np.array(input_set)
 np.savetxt('./input/input.txt', input_set)
