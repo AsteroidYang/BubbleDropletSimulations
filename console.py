@@ -5,7 +5,7 @@ import visialization as vs
 
 box_x, box_y, box_z, T, e_ff, ite_num = 60, 60, 60, 0.8, 1, 10000
 mu = -3.05
-NV_0 = 12000
+NV_0 = 20000
 target_slice = 10000
 slice_layer = 30
 
